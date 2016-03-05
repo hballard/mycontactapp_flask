@@ -13,12 +13,6 @@ module.exports = {
         extensions: ['', '.js', '.jsx', '.scss']
     },
     devtool: 'source-map',
-    // proxy: {
-    //   '*': {
-    // target: 'http://0.0.0.0:5000',
-    // secure: false,
-    //   },
-    // },
     module: {
         loaders: [
             {
@@ -34,7 +28,7 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new ExtractTextPlugin(path.join('styles','main.css'), {
+        new ExtractTextPlugin(path.join('styles','[name].css'), {
             allChunks: true
         })
     ]
