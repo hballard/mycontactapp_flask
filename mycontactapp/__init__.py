@@ -1,7 +1,10 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+
 
 app = Flask('mycontactapp')
 app.config.from_pyfile('../config.py')
+db = SQLAlchemy(app)
 
 
 # Try to remap 'static' folder to URI of webpack server, so I can use url_for()
