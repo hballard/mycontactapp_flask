@@ -4,9 +4,9 @@ var ExtractTextPlugin= require('extract-text-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 
 module.exports = {
-    entry: ['./src/scripts/main.js'],
+    entry: ['./mycontactiapp/static/src/scripts/main.js'],
     output: {
-        path: path.resolve(__dirname, './dist'),
+        path: path.resolve(__dirname, './mycontactapp/static/dist'),
         filename: 'scripts/[name].js',
         publicPath: 'http://localhost:3000/'
     },
