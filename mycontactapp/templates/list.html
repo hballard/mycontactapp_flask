@@ -1,0 +1,7 @@
+<h3><cite>Contacts</cite></h3>
+<ul>
+    {% for contact in contacts %}
+        <li><a href="get_contact/{{ contact.id }}">
+        {{ contact.first_name }} {{ contact.last_name }}</a></li>
+    {% endfor %}
+</ul>
