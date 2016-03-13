@@ -1,27 +1,39 @@
 {% extends 'base.html' %}
 {% block contact %}
-    <div><h3><cite>Contact Card</cite></h3>
-        <div><h1>{{ contact.first_name if contact.first_name != None else "" }}
-        {{ contact.last_name if contact.last_name != None else "" }}</h1></div>
-        <div><p>{{ contact.company if contact.company != None else "" }}
-            <br>
-            {{ contact.job_title if contact.job_title != None else "" }}
-            <br>
-            {{ contact.phone_number if contact.phone_number != None else "" }}
-            <br>
-            {{ contact.email if contact.email != None else "" }}
-        </p>
-        <p>{{ contact.address1 if contact.address1 != None else "" }}
-            <br>
-            {{ contact.city if contact.city != None else "" }}
-            {{ contact.state if contact.state != None else "" }}
-            {{ contact.zip if contact.zip != None else "" }}
-        </p></div></div>
-        <div><h3><cite>Contacts</cite></h3>
-            <ul>
-                {% for contact in contacts %}
-                    <li><a href="{{ contact.id }}">
-                    {{ contact.first_name }} {{ contact.last_name }}</a></li>
-                {% endfor %}
-            </ul></div>
-        {% endblock %}
+    <div>
+        <h3><cite>Contact Card</cite></h3>
+        <div>
+            <h1>
+                {{ contact.first_name if contact.first_name != None else "" }}
+                {{ contact.last_name if contact.last_name != None else "" }}
+            </h1>
+        </div>
+        <div>
+            <p>
+                {{ contact.company if contact.company != None else "" }}
+                <br>
+                {{ contact.job_title if contact.job_title != None else "" }}
+                <br>
+                {{ contact.phone_number if contact.phone_number != None else "" }}
+                <br>
+                {{ contact.email if contact.email != None else "" }}
+            </p>
+            <p>{{ contact.address1 if contact.address1 != None else "" }}
+                <br>
+                {{ contact.city if contact.city != None else "" }}
+                {{ contact.state if contact.state != None else "" }}
+                {{ contact.zip if contact.zip != None else "" }}
+            </p>
+        </div>
+    </div>
+    <div>
+        <h3><cite>Contacts</cite></h3>
+        <ul>
+            {% for contact in all_contacts %}
+                <li><a href="{{ contact.id }}">
+                    {{ contact.first_name }} {{ contact.last_name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

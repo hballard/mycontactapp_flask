@@ -1,2 +1,4 @@
+require('../../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss');
 require('../styles/main.scss');
-console.log('hello world ');
+var $ = require('jquery');
+require('bootstrap-sass');

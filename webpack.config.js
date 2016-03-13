@@ -4,7 +4,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 
 module.exports = {
-    entry: ['./mycontactiapp/static/src/scripts/main.js'],
+    entry: ['./mycontactapp/static/src/scripts/main.js'],
     output: {
         path: path.resolve(__dirname, './mycontactapp/static/dist'),
         filename: 'scripts/[name].js',
@@ -17,9 +17,20 @@ module.exports = {
     module: {
         loaders: [
             {
+                test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "url?limit=10000"
+            },
+            {
+                test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
+                loader: 'file'
+            },
+            {
                 test: [/\.js$/, /\.es6$/],
                 exclude: /node_modules/,
                 loader: 'babel?presets[]=react,presets[]=es2015'
+            },
+            {   test: /bootstrap-sass\/assets\/javascripts\//,
+                loader: 'imports?jQuery=jquery'
             },
             {
                 test: /(\.scss|\.css)$/,
