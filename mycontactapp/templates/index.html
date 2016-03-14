@@ -1,39 +1,84 @@
 {% extends 'base.html' %}
 {% block contact %}
-    <div>
-        <h3><cite>Contact Card</cite></h3>
-        <div>
-            <h1>
-                {{ contact.first_name if contact.first_name != None else "" }}
-                {{ contact.last_name if contact.last_name != None else "" }}
-            </h1>
+    <div id="main-container" class="container row">
+        <div class="col-lg-6 col-lg-offset-1 col-md-6 col-md-offset-1 col-sm-6 col-sm-offset-2 col-xs-12">
+            <div class="page-header"><h3><strong>Contact Info</strong></h3>
+            </div>
+            <div>
+                <h1>
+                    {{ contact.first_name if contact.first_name != None else "" }}
+                    {{ contact.last_name if contact.last_name != None else "" }}
+                </h1>
+            </div>
+            <div>
+                <table class="table table-hover table-striped">
+                    <tbody>
+                    <tr>
+                        <td class='text-right'><strong>Company</strong></td>
+                        <td>{{ contact.company }}</td>
+                    </tr>
+                    <tr>
+                        <td class='text-right'><strong>Job Title:</strong></td>
+                        <td>{{ contact.job_title }}</td>
+                    </tr>
+                    <tr>
+                        <td class='text-right'><strong>Phone Number:</strong></td>
+                        <td>{{ contact.phone_number }}</td>
+                    </tr>
+                    <tr>
+                        <td class='text-right'><strong>Email:</strong></td>
+                        <td>{{ contact.email }}</td>
+                    </tr>
+                    <tr>
+                        <td class='text-right'><strong>Address:</strong></td>
+                        <td>{{ contact.address1 }}
+                            <br>
+                            {{ contact.city }}, {{ contact.state }} {{ contact.zip }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class='text-right'><strong>Comments:</strong></td>
+                        <td>{{ contact.comments }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div>
-            <p>
-                {{ contact.company if contact.company != None else "" }}
-                <br>
-                {{ contact.job_title if contact.job_title != None else "" }}
-                <br>
-                {{ contact.phone_number if contact.phone_number != None else "" }}
-                <br>
-                {{ contact.email if contact.email != None else "" }}
-            </p>
-            <p>{{ contact.address1 if contact.address1 != None else "" }}
-                <br>
-                {{ contact.city if contact.city != None else "" }}
-                {{ contact.state if contact.state != None else "" }}
-                {{ contact.zip if contact.zip != None else "" }}
-            </p>
+        <div id="list-container" class="col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 col-xs-12">
+            <div class="page-header"><h3><strong>Contacts</strong></h3>
+            </div>
+            <ul class="list-unstyled">
+                {% for contact in all_contacts %}
+                    <li><a href="{{ contact.id }}">
+                        {{ contact.first_name }} {{ contact.last_name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
-    </div>
-    <div>
-        <h3><cite>Contacts</cite></h3>
-        <ul>
-            {% for contact in all_contacts %}
-                <li><a href="{{ contact.id }}">
-                    {{ contact.first_name }} {{ contact.last_name }}</a>
-                </li>
-            {% endfor %}
-        </ul>
+        <div class="col-lg-2 col-lg-offset-3 vertical-align">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
+              Add Contact
+            </button>
+        </div>
+        </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"><strong>Add New Contact</strong></h4>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
+

@@ -1,4 +1,4 @@
-from mycontactapp import db
+from . import db
 
 
 class Contacts(db.Model):

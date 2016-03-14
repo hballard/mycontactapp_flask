@@ -1,5 +1,22 @@
-.example {
-  h1 {
-    color: green;
-  }
+body {
+  background: #0b97c4;
+  font-size: 16px;
+  line-height: 2em;
+}
+
+#main-container {
+  margin: 6em auto;
+  max-width: 50em;
+  border: 5px solid #ccc;
+  padding: 1em 1em;
+  background: white;
+}
+
+#list-container {
+  padding-left: 1em;
+}
+
+.vertical-align {
+    float: right;
+    padding-top: 10em;
 }
