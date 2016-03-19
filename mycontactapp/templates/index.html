@@ -48,9 +48,12 @@
             <div class="page-header"><h3><strong>Contacts</strong></h3>
             </div>
             <ul class="list-unstyled">
-                {% for contact in all_contacts %}
-                    <li><a href="{{ contact.id }}">
-                        {{ contact.first_name }} {{ contact.last_name }}</a>
+                {% for list_contact in all_contacts %}
+                    <li {% if contact.id is equalto list_contact.id %}
+                            class='active-item' {% endif -%}>
+                        <a {% if contact.id is equalto list_contact.id %}
+                            class='active-item' {% endif -%} href="{{ list_contact.id }}">
+                        {{ list_contact.first_name }} {{ list_contact.last_name }}</a>
                     </li>
                 {% endfor %}
             </ul>
@@ -58,7 +61,7 @@
         <div class="col-lg-2 col-lg-offset-3 vertical-align">
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
-              Add Contact
+              Edit Contact
             </button>
         </div>
         </div>

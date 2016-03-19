@@ -14,9 +14,16 @@ body {
 
 #list-container {
   padding-left: 1em;
+  height: 30em;
+  text-align: center;
+  overflow: scroll;
 }
 
 .vertical-align {
     float: right;
-    padding-top: 10em;
+}
+
+.active-item {
+  color: white;
+  background: #337ab7;
 }
