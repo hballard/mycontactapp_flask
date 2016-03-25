@@ -1,0 +1,26 @@
+{% macro contact_form(my_form, form_id, my_action_url) %}
+    <form id="{{ form_id }}" method="post" action="{{ '/' + my_action_url|string() }}">
+        <fieldset class="form-group">
+            {{ my_form.hidden_tag() }}
+            {% for field in my_form if field.widget.input_type != 'hidden' %}
+            <label>{{ field.label }}</label>
+            {{ field(class_="form-control") }}
+            {% endfor %}
+        </fieldset>
+    </form>
+{% endmacro %}ƒ
+
+
+{% macro with_errors(field) %}
+    <div class="form_field">
+    {% if field.errors %}
+        {% set css_class = 'has_error ' + kwargs.pop('class', '') %}
+        {{ field(class=css_class, **kwargs) }}
+        <ul class="errors">{% for error in field.errors %}
+            <li>{{ error|e }}</li>{% endfor %}
+        </ul>
+    {% else %}
+        {{ field(**kwargs) }}
+    {% endif %}
+    </div>
+{% endmacro %}
