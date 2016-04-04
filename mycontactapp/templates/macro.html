@@ -3,8 +3,10 @@
         <fieldset class="form-group">
             {{ my_form.hidden_tag() }}
             {% for field in my_form if field.widget.input_type != 'hidden' %}
-            <label>{{ field.label }}</label>
-            {{ field(class_="form-control") }}
+            <div class="form-group">
+                <label>{{ field.label }}</label>
+                {{ field(class_="form-control") }}
+            </div>
             {% endfor %}
         </fieldset>
     </form>
