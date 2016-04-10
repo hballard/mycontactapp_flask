@@ -30,7 +30,7 @@ def add_new_contact():
                               .order_by(Contacts.id.desc())\
                               .first()
         return redirect('/{}'.format(new_contact.id))
-    flash_errors(new_contact_form)
+    flash_errors(new_contact_form, 'add')
     return redirect('/')
 
 
@@ -45,7 +45,7 @@ def edit_contact(contact_id):
         if edit_contact_form.data.get('active_status') is True:
             return redirect('/{}'.format(contact_id))
         return redirect('/')
-    flash_errors(edit_contact_form)
+    flash_errors(edit_contact_form, 'edit')
     return redirect('/{}'.format(contact_id))
 
 

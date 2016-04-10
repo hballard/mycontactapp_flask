@@ -3,9 +3,8 @@ require('../styles/style.scss');
 require('bootstrap-sass');
 var $ = require('jquery');
 
-$(document).ready(function(formErrors) {
-    if (formErrors) {
-        //$('.modal').modal('show');
-        console.log('This function works!')
+$(document).ready(function() {
+    if ($('.form-errors').length) {
+        $('.modal:has(.form-errors)').modal('show');
     }
 });
