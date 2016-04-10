@@ -16,7 +16,12 @@ body {
   padding-left: 1em;
   height: 30em;
   text-align: center;
-  overflow: hidden;
+  padding-bottom: 20em;
+}
+
+.list-unstyled {
+  overflow: scroll;
+  max-height: 20em;
 }
 
 .vertical-align {
