@@ -1,21 +1,31 @@
 var path = require('path');
 var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var autoprefixer = require('autoprefixer');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var ManifestRevisionPlugin = require('manifest-revision-webpack-plugin');
+
+var rootAssetPath = './mycontactapp/static/src'
+var outputPath = './mycontactapp/static/dist'
 
 module.exports = {
-    entry: ['./mycontactapp/static/src/scripts/main.js'],
+    entry: [rootAssetPath + '/scripts/main.js'],
     output: {
-        path: path.resolve(__dirname, './mycontactapp/static/dist'),
+        path: outputPath,
         filename: 'scripts/[name].js',
         publicPath: 'http://localhost:3000/'
     },
     resolve: {
         extensions: ['', '.js', '.jsx', '.scss']
     },
-    devtool: 'source-map',
+    //devtool: 'source-map',
     module: {
         loaders: [{
+            test: /\.(jpe?g|png|gif|svg([\?]?.*))$/i,
+            loaders: [
+                'file?context=' + rootAssetPath + '&name=[name].[ext]',
+                'image?bypassOnDebug&optimizationLevel=7&interlaced=false'
+            ]
+        }, {
             test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
             loader: "url?limit=10000"
         }, {
@@ -38,8 +48,12 @@ module.exports = {
     })],
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new ExtractTextPlugin(path.join('styles', '[name].css'), {
+        new ExtractTextPlugin('styles/[name].css', {
             allChunks: true
+        }),
+        new ManifestRevisionPlugin(outputPath + '/manifest.json', {
+            rootAssetPath: rootAssetPath,
+                ignorePaths: ['/styles', '/scripts']
         })
     ]
 };

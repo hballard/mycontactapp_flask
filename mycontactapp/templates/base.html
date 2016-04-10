@@ -8,14 +8,14 @@
     {% block title %}
     <title>Web Contacts</title>
     {% endblock %}
-    <!-- <script type="text/javascript" src="{{ url_for('static', filename='scripts/main.js',       _external=True) }}"></script>
-        <link type="text/css" href="{{ url_for('static', filename='scripts/main.css',               _external=True) }}" rel="stylesheet"> -->
-    <script type="text/javascript" src="http://localhost:3000/scripts/main.js"></script>
+    <!--<link type="text/css" href="{{ url_for('static', filename='scripts/main.css',_external=True) }}" rel="stylesheet"> -->
     <link type="text/css" href="http://localhost:3000/styles/main.css" rel="stylesheet">
 </head>
     {% block body %}
     <body>
         {% block contact %}{% endblock %}
+        <script type="text/javascript" src="http://localhost:3000/scripts/main.js"></script>
+         <!--<script type="text/javascript" src="{{ url_for('static',filename='scripts/main.js', _external=True) }}"></script>-->
     </body>
     {% endblock %}
 </html>

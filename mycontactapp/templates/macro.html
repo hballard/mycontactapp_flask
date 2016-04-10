@@ -10,10 +10,10 @@
             {% endfor %}
         </fieldset>
     </form>
-{% endmacro %}ƒ
+{% endmacro %}
 
 
-{% macro with_errors(field) %}
+{% macro get_form_field_errors(field) %}
     <div class="form_field">
     {% if field.errors %}
         {% set css_class = 'has_error ' + kwargs.pop('class', '') %}
@@ -25,4 +25,20 @@
         {{ field(**kwargs) }}
     {% endif %}
     </div>
+{% endmacro %}
+
+
+{% macro get_error_messages() %}
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <script type="text/javascript" charset="utf-8">
+         var formErrors = true; 
+      </script>
+        <ul class="list-unstyled">
+        {% for message in messages %}
+          <li class="alert alert-info">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
 {% endmacro %}

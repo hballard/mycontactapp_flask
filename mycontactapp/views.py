@@ -2,6 +2,7 @@ from flask import render_template, abort, redirect, request
 from .models import Contacts, db
 from . import app
 from .forms import MyForm
+from .utilities import flash_errors
 
 
 @app.errorhandler(404)
@@ -29,6 +30,8 @@ def add_new_contact():
                               .order_by(Contacts.id.desc())\
                               .first()
         return redirect('/{}'.format(new_contact.id))
+    flash_errors(new_contact_form)
+    return redirect('/')
 
 
 @app.route('/<int:contact_id>', methods=['POST'])
@@ -42,7 +45,8 @@ def edit_contact(contact_id):
         if edit_contact_form.data.get('active_status') is True:
             return redirect('/{}'.format(contact_id))
         return redirect('/')
-    return redirect('/')
+    flash_errors(edit_contact_form)
+    return redirect('/{}'.format(contact_id))
 
 
 @app.route('/<int:contact_id>')

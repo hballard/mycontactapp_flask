@@ -83,6 +83,7 @@
                         <h4 class="modal-title" id="myModalLabel"><strong>Edit Contact</strong></h4>
                     </div>
                     <div class="modal-body">
+                        {{  macro.get_error_messages() }}
                         {{  macro.contact_form(edit_form, 'edit_form', contact.id) }}
                     </div>
                     <div class="modal-footer">
@@ -102,6 +103,7 @@
                         <h4 class="modal-title" id="myModalLabel"><strong>Add New Contact</strong></h4>
                     </div>
                     <div class="modal-body">
+                        {{  macro.get_error_messages() }}
                         {{  macro.contact_form(new_form, 'new_form', 'add_new_contact') }}
                     </div>
                     <div class="modal-footer">
