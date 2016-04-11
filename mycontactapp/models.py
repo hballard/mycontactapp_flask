@@ -13,16 +13,13 @@ class Contacts(db.Model):
     address1 = db.Column(db.String(250))
     city = db.Column(db.String(120))
     state = db.Column(db.String(80))
-    zipcode = db.Column(db.Integer)
+    zipcode = db.Column(db.String(120))
     comments = db.Column(db.Text)
     active_status = db.Column(db.Boolean, default=True)
 
-    def __init__(self, first_name, last_name, **kwargs):
+    def __init__(self, **kwargs):
 
         super(Contacts, self).__init__(**kwargs)
-        # do custom initialization here
-        self.first_name = first_name
-        self.last_name = last_name
 
     def __repr__(self):
         return '<Contact %r: %r>' % (self.id, self.first_name)

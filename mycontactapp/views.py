@@ -12,11 +12,11 @@ def page_not_found(e):
 
 @app.route('/')
 def landing():
-    all_contacts = Contacts.query\
+    first_contact = Contacts.query\
         .filter_by(active_status=True)\
         .order_by(Contacts.first_name)\
         .first()
-    return redirect('/{}'.format(all_contacts.id))
+    return redirect('/{}'.format(first_contact.id))
 
 
 @app.route('/add_new_contact', methods=['POST'])
