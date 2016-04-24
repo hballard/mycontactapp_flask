@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+{% import 'macro.html' as macro %}
+{% block contact %}
+    <div id="main-container" class="container row">
+        <div class="col-lg-6 col-lg-offset-1 col-md-6 col-md-offset-1 col-sm-6 col-sm-offset-2 col-xs-12">
+            <div class="page-header"><h3><strong>Contact Info</strong></h3>
+            </div>
+            <div>
+                <h1>
+                    No Contacts
+                </h1>
+            </div>
+            <div>
+                    Enter a new contact to use this app.
+            </div>
+        </div>
+        <div id="list-container"
+             class="col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 col-xs-12">
+            <div class="page-header"><h3><strong>Contacts</strong></h3>
+            </div>
+            <ul class="list-unstyled">
+            </ul>
+        </div>
+        <!-- New Contact Button trigger modal -->
+        <div class="col-lg-2 col-lg-offset-3 vertical-align">
+            <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#new_contact">
+                New Contact
+            </button>
+        </div>
+        <!-- New Contact Modal -->
+        <div class="modal fade" id="new_contact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><strong>Add New Contact</strong></h4>
+                    </div>
+                    <div class="modal-body">
+                        {{  macro.get_error_messages('add') }}
+                        {{  macro.contact_form(new_form, 'new_form', 'add_new_contact') }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" form="new_form" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

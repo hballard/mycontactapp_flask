@@ -5,18 +5,39 @@ from .forms import MyForm
 from .utilities import flash_errors
 
 
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('404.html'), 404
-
-
 @app.route('/')
 def landing():
-    first_contact = Contacts.query\
+    try:
+        first_contact = Contacts.query\
+            .filter_by(active_status=True)\
+            .order_by(Contacts.first_name)\
+            .first()
+        return redirect('/{}'.format(first_contact.id))
+    except:
+        redirect('/start')
+
+
+@app.route('/start')
+def start_page():
+    return render_template('start.html', new_form=MyForm())
+
+
+@app.route('/<int:contact_id>')
+def index(contact_id=1):
+    all_contacts = Contacts.query\
+        .with_entities(Contacts.id, Contacts.first_name, Contacts.last_name)\
         .filter_by(active_status=True)\
         .order_by(Contacts.first_name)\
-        .first()
-    return redirect('/{}'.format(first_contact.id))
+        .all()
+    if contact_id not in [contact[0] for contact in all_contacts]:
+        abort(404)
+    else:
+        contact = Contacts.query.get(contact_id)
+        return render_template('index.html',
+                               contact=contact,
+                               all_contacts=all_contacts,
+                               edit_form=MyForm(obj=contact),
+                               new_form=MyForm())
 
 
 @app.route('/add_new_contact', methods=['POST'])
@@ -49,19 +70,6 @@ def edit_contact(contact_id):
     return redirect('/{}'.format(contact_id))
 
 
-@app.route('/<int:contact_id>')
-def index(contact_id=1):
-    all_contacts = Contacts.query\
-        .with_entities(Contacts.id, Contacts.first_name, Contacts.last_name)\
-        .filter_by(active_status=True)\
-        .order_by(Contacts.first_name)\
-        .all()
-    if contact_id not in [contact[0] for contact in all_contacts]:
-        abort(404)
-    else:
-        contact = Contacts.query.get(contact_id)
-        return render_template('index.html',
-                               contact=contact,
-                               all_contacts=all_contacts,
-                               edit_form=MyForm(obj=contact),
-                               new_form=MyForm())
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
