@@ -20,7 +20,7 @@ body {
 }
 
 .list-unstyled {
-  overflow: scroll;
+  overflow-y: auto;
   max-height: 20em;
 }
 
@@ -32,3 +32,4 @@ body {
   color: white;
   background: #337ab7;
 }
+

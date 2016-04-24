@@ -1,59 +1,57 @@
-var path = require('path');
-var webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var ManifestRevisionPlugin = require('manifest-revision-webpack-plugin');
-
-var rootAssetPath = './mycontactapp/static/src'
-var outputPath = './mycontactapp/static/dist'
+const autoprefixer = require('autoprefixer');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-    entry: [rootAssetPath + '/scripts/main.js'],
-    output: {
-        path: outputPath,
-        filename: 'scripts/[name].js',
-        publicPath: 'http://localhost:3000/'
-    },
-    resolve: {
-        extensions: ['', '.js', '.jsx', '.scss']
-    },
-    //devtool: 'source-map',
-    module: {
-        loaders: [{
-            test: /\.(jpe?g|png|gif|svg([\?]?.*))$/i,
-            loaders: [
-                'file?context=' + rootAssetPath + '&name=[name].[ext]',
-                'image?bypassOnDebug&optimizationLevel=7&interlaced=false'
-            ]
-        }, {
-            test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-            loader: "url?limit=10000"
-        }, {
-            test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
-            loader: 'file'
-        }, {
-            test: [/\.js$/, /\.es6$/],
-            exclude: /node_modules/,
-            loader: 'babel?presets[]=react,presets[]=es2015'
-        }, {
-            test: /bootstrap-sass\/assets\/javascripts\//,
-            loader: 'imports?jQuery=jquery'
-        }, {
-            test: /(\.scss|\.css)$/,
-            loader: ExtractTextPlugin.extract('css-loader!postcss-loader!sass-loader')
-        }]
-    },
-    postcss: [autoprefixer({
-        browsers: ['last 2 versions']
-    })],
-    plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new ExtractTextPlugin('styles/[name].css', {
-            allChunks: true
-        }),
-        new ManifestRevisionPlugin(outputPath + '/manifest.json', {
-            rootAssetPath: rootAssetPath,
-                ignorePaths: ['/styles', '/scripts']
-        })
-    ]
+
+  entry: [
+    'bootstrap-loader',
+    './mycontactapp/static/src/scripts/main'
+  ],
+
+  output: {
+    path: path.join(__dirname, '/mycontactapp/static/dist'),
+    filename: 'scripts/[name].js',
+    publicPath: '/',
+  },
+
+  devtool: '#cheap-module-eval-source-map',
+
+  resolve: { extensions: [ '', '.js', '.jsx' ] },
+
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+    new ExtractTextPlugin('styles/[name].css', { allChunks: true }),
+  ],
+
+  module: {
+    loaders: [
+      { 
+        test: /\.css$/, loaders: [ 'style', 'css', 'postcss' ]
+      },
+      { 
+        test: /\.scss$/, loaders: [ 'style', 'css', 'postcss', 'sass' ]
+      },
+      {
+        test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "url-loader?limit=10000&mimetype=application/font-woff2&name=[name].[ext]"
+      },
+      {
+        test: [/\.js$/, /\.es6$/],
+        exclude: /node_modules/,
+        loader: 'babel?presets[]=react,presets[]=es2015'
+      },
+      {
+        test: /\.(eot|ttf|svg|gif|png)$/,
+        loader: "file?name=[name].[ext]"
+      },
+      // Bootstrap 3
+      { test: /bootstrap-sass\/assets\/javascripts\//, loader: 'imports?jQuery=jquery' },
+    ],
+  },
+
+  postcss: [ autoprefixer ],
+
 };

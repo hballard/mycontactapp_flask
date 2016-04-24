@@ -7,18 +7,18 @@ from wtforms.validators import Email, Length, Optional, Regexp
 
 class MyForm(Form):
     first_name = StringField('First Name', validators=[Length(max=80),
-                                                       Optional()])
+        Optional()])
     last_name = StringField('Last Name', validators=[Length(max=80),
-                                                     Optional()])
+        Optional()])
     job_title = StringField('Job Title', validators=[Length(max=120),
-                                                     Optional()])
+        Optional()])
     company = StringField('Company', validators=[Length(max=120), Optional()])
     phone_number = TelField('Phone Number', validators=[Regexp('^(?:(?:\+?1\s*'
-            '(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1'
-            '|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8]'
-            '[02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]'
-            '{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)'
-            '\s*(\d+))?$'),Optional()])
+        '(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1'
+        '|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8]'
+        '[02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]'
+        '{2})\s*(?:[.-]\s*)?([0-9]{4})(?:\s*(?:#|x\.?|ext\.?|extension)'
+        '\s*(\d+))?$'),Optional()])
     email = EmailField('Email', validators=[Email(), Optional()])
     address1 = StringField('Address', validators=[Length(max=120), Optional()])
     city = StringField('City', validators=[Length(max=120), Optional()])
@@ -26,5 +26,5 @@ class MyForm(Form):
     zipcode = StringField('Zip Code', validators=[Length(max=80),
         Regexp('^\d{5}(?:[-\s]\d{4})?$'), Optional()])
     comments = TextAreaField('Comments', validators=[Length(max=250),
-                                                     Optional()])
+        Optional()])
     active_status = BooleanField('Un-check to Delete', default='Checked')
