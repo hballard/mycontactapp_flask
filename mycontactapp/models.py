@@ -2,7 +2,6 @@ from . import db
 
 
 class Contacts(db.Model):
-
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(80))
     last_name = db.Column(db.String(80))
@@ -18,7 +17,6 @@ class Contacts(db.Model):
     active_status = db.Column(db.Boolean, default=True)
 
     def __init__(self, **kwargs):
-
         super(Contacts, self).__init__(**kwargs)
 
     def __repr__(self):

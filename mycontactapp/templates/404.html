@@ -1,6 +1,28 @@
-{% extends "base.html" %}
-{% block body %}
-    <h1>Page Not Found</h1>
-    <p>What you were looking for is just not there.
-    <p><a href="{{ url_for('landing') }}">Back to app</a>
+{% extends 'base.html' %}
+
+
+{% import 'macro.html' as macro %}
+{% block contact %}
+    <div id="main-container" class="container row">
+        <div class="col-lg-6 col-lg-offset-1 col-md-6 col-md-offset-1 col-sm-6 col-sm-offset-2 col-xs-12">
+            <div class="page-header"><h3><strong>Contact Info</strong></h3>
+            </div>
+            <div>
+                <h1>
+                    Error - No Contact Found
+                </h1>
+            </div>
+            <div>
+                    You seemed to have arrived here by error.
+                    <p><a href="{{ url_for('landing') }}">Back to app</a>
+            </div>
+        </div>
+        <div id="list-container"
+             class="col-lg-3 col-lg-offset-1 col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 col-xs-12">
+            <div class="page-header"><h3><strong>Contacts</strong></h3>
+            </div>
+            <ul class="list-unstyled">
+            </ul>
+        </div>
+    </div>
 {% endblock %}
